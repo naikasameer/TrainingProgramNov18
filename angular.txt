@@ -1,0 +1,216 @@
+Setting Up Angular Environment
+a. Identify the IDE, Visual Studio Code
+b. Check Node Js is available
+c. Install Angular CLI
+	npm install -g @angular/cli
+d. the path of installation for local install
+	C:\Users\<profile-name>\AppData\Roaming\npm,npm-cache
+e. Create a new Blank or Starter Application in Angular
+	ng new mastek-app
+
+Understanding Angular Application Structure
+1. package.json: Config file for NodeJS environment using Node Package Manager
+	npm start, npm build, npm test
+2. angular.json: Configuration file for understanding Angular Build commands and configuration
+	i.   project name: mastek-app
+	ii.  index: 'index.html': startup page of the app
+	iii. main: 'main.ts': startup script of the app
+3. Hierarchy Structure of Angular App
+	i. each Angular representing package of Node JS
+	ii. In One package we can create/have mulitple Modules [app-module]
+	iii. In each Module we can have multiple code units
+	iv. Code Unit: Component,Service,Pipe, Directive
+4. Module Configuration in angular
+	a. for each module, one config file <module-name>.module.ts
+	b. @NgModule: configures angular Modules 
+		i.  declarations: list of code units declared in the current module
+		ii. imports: List of Other Modules we refer in this current Module
+		iii.providers: List of Services to be initialized and available within this module
+		iv. bootstrap: List of Startup Components in the current Module
+5. Component Configuration in Angular
+	a. for each component: [<name>.component.ts,<name>.component.html,<name>.component.css]	
+	b. @Component: configure angular Component
+		i. selector: pattern to display the component template in Root Page
+			eg:"<tag-name>", <.class-name>, <#id>
+		ii. templateURL: identify the filename/path for the html page
+		iii. styleURLs: List of Stylesheets to be applied for the component HTML template
+6. Approach for Angular Development
+	a. Identify the requirement and declare data members in the component
+	b. Create/Modify the HTML Template to display the contents
+	c. Identify the User Interactions for Event Handling
+	d. Create the Event Handling Callback Functions to write the business logic 
+	e. Identifying the data from storage, and connect to service to fetch the details
+7. Using HTML template in Angular
+	a. {{datavariable}}: used to display data values of the variable
+	b. *ngFor,*ngIf: Control directives, 
+		i. ngFor:for Iterating through Array,
+		ii.ngIf: hide/display the content
+	c. Two way DataBinding using Angular Form
+		i. Identify the input field and the data variable
+		ii.<input [(ngModel)]="datavariable">
+	d. Event Binding of Elements
+		i. identify the event to call the function
+		ii. <tag (event-name)="fn(args)"> eg. <button (click)="toggleEditFields()">
+	e. Element Binding
+		i. identify the input Element
+		ii. USe #<id> in the input element to access the element in Angular
+			eg. <input placeholder="Number" size="8" #pid>
+8. Managing State using Local/Session Storage 
+	i. localStorage: helps to maintain data for the url in browser across session in the device
+	ii. sessionStorage: helps to maintain data for each url session for the device
+	iii. storing data in storage <storage>.setItem("<key:string>","<value:string>")
+	iv. get the data from storage <storage>.getItem("<key:string>")
+	v. For Object Storage , 
+		a. JSON.stringify(obj): converts the object structure to string
+		b. JSON.parse(string): converts String into JSON Object Structure
+	vi. For Date Storage 
+		a. Date.toDateString(): convert date to String format
+		b. new Date(Date.parse(string)): convert String to Date object
+	vii. To View Storage Data : Browser -> F12 / Menu -> More Tools -> Developer Tools
+		Elements: show the current Structure of the page
+		Console: Shows Log or error Messages on user interactions
+		Sources: Scripts generated for the appliction page
+		Application: the details about storage data
+9. Validations in Angular
+	a. identify the validation rules for each component
+	b. for [(ngModel)] use validators of Angular [minlength,required,pattern]
+	c. for Element Binding #[id] use the application logic to manage validations
+	d. Custom validation logic for Applications
+	e. apply appropriate stylesheets and display the error messages using <div>
+10. Angular Pipes
+	a. Helps to transform the output in specific format
+	b. String pipes: uppercase, lowercase
+	c. Date Pipes: date: <format>
+	d. Array Pipes: slice : begin-index,end-index
+	e. Creating our own custom transform Pipe
+		i. ng g pipe <name>
+	f. Implement the standard method for transforming content
+		i. transform(<value>,<args>):<transformed-value>
+	g. summary:<length> to display n characters as preview of the content
+
+11. Hosting Services using Express JS
+	a. identify the project and install express js as a module in the project
+		i. npm install express --save
+	b. create the app API service file <name>-service.js
+	c. Identify the requirement and create Business method to support HTTP request processing
+	d. <app-name>.<http-method>(<URL-path>,(req,res)=>{busines logic for processing response})
+	e. Getting inputs from Request: Path Variables [req.params.<name>], Body: [req.body.<name>]
+	f. For Request Body processing, body-parser: url-encoded and json format
+	g. For Sharing response to Client: res.send(<data for the client>)
+	h. For printing logs on Server : console.log(<message>)
+	i. app.listen(port,startup-code): used to host the service in expressjs
+	j. app.use(): apply to additional settings to the applcation
+	
+12. Accessing Services In Angular Using Http Module
+	a. import HTTP Client Module in Respective app Module
+	b. Create a new Angular Service to access the Web API 
+		i. ng g service <service-name>
+	c. Write service call Methods to access each HTTP methods for web API using the Http Client
+		i. svc.<httpMethod>(url,[body,options]):Observable
+	d. Access the Angular Service in the component to connect to the Web API
+		prjsvc.<method>(args).subscribe(res=>{process response})
+13. Angular Routing
+	a. Create the Project with Router Module [appRouting.module.ts] 
+	b. Routes: [{path:'<URL>',component: <Component-name>}]
+	c. app.component.html: <a routerLink="<path>"> : <router-outlet> to display the output
+	d. import appRoutingModule in app.module.ts
+	e. test the navigation using the home menu
+14. Angular Directives
+	a. Create the Directive: ng g directive <directive-name>
+	b. refer the current Element in the constructor (<name>:ElementRef)
+	c. @Directive{[selector:'<label-name>']}	
+	d. add the methods to manage logic of formatting change 
+	e. @HostListener: to register event binding of current Elment in Directives
+	f. @Input : to accept attribute value from user for the variable [any one variable]
+	g. apply the direcive in UI, < [directive]="[variable|'value']">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this.prjSvc.addNewProject({empno:this.empno,pid:newProject.projectid,
+      pname:newProject.name,ploc:newProject.location}).subscribe(
+        res=>{
+          this.prjSvc.getProjects(this.empno).subscribe(res=>{this.projects=res});
+        }
+      )
+  

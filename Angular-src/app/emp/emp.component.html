@@ -1,0 +1,88 @@
+<h2>Employee Information</h2>
+<table>
+  <tr>
+    <td>Empno:</td>
+    <td *ngIf="isEditable">
+   <div class="form-group">
+      <input required  [(ngModel)]="empno" type="text" 
+       name="empno" id="empno" #inputEmpno="ngModel" maxlength="6" minlength="2">
+       
+    <span [hidden]="inputEmpno.valid || inputEmpno.pristine" class="alert alert-danger">
+        Empno should not be less than 2 characters
+    </span>
+   </div>   
+    </td>
+    <td [highlight]="'lime'" *ngIf="!isEditable">{{empno}}</td>
+    <td><button (click)="toggleEditFields()">
+      {{((isEditable)?"Save":"Edit")}}</button></td>
+  </tr>
+  <tr>
+    <td>Name:</td>
+    <td *ngIf="isEditable">
+      <div class="form-group">
+          <input required [(ngModel)]="name" maxlength="25" minlength="4"
+          name="name" id="name" #inputName="ngModel">
+      </div>
+      <div [hidden]="inputName.valid || inputName.pristine" class="alert alert-danger">
+          Name should not be less than 4 characters
+        </div>
+    </td>
+    <td [highlight] *ngIf="!isEditable">{{name | uppercase | summary}}</td>
+  </tr>  
+  <tr>
+    <td>Department:</td>
+    <td *ngIf="isEditable">
+      <div class="form-group">
+          <input required [(ngModel)]="department" maxlength="30" 
+            name="department" id="department" #inputdep="ngModel" minlength="4">
+      </div>
+      <div [hidden]="inputdep.valid || inputdep.pristine" class="alert alert-danger">
+        Department should not be less than 4 characters
+      </div>
+      </td>
+      
+    <td [highlight]="bandColor" *ngIf="!isEditable">{{department | summary:8}}</td>
+  </tr>
+  <tr>
+      <td>Joining Date:</td>
+      <td *ngIf="isEditable"><input [(ngModel)]="joiningDate" type="date" name="joiningDate"></td>
+      <td *ngIf="!isEditable">{{joiningDate | date:"dd-MMM-yy, hh:mm:ss"}}</td>
+    </tr>
+    <tr>
+        <td>Band Color:</td>
+        <td *ngIf="isEditable"><input [(ngModel)]="bandColor" type="color" name="bandColor"></td>
+        <td *ngIf="!isEditable" bgColor="{{bandColor}}">       </td>
+      </tr>
+</table>
+<h2>Project Details</h2>
+<h3>{{displaymessage}}</h3>
+<table>
+  <tr>
+      <th>Number</th>
+      <th>Name</th>
+      <th>Location</th>
+      <th><button (click)="showProjectForm()">+</button></th>
+  </tr>
+ <!-- <tr *ngFor="let p of projects |slice:0:3 ; let i=index"> : with Slice Pipe in Angular-->
+  <tr *ngFor="let p of projects; let i=index">
+    <td>{{p.projectid}}</td>
+    <td>{{p.name}}</td>
+    <td>{{p.location}}</td>
+    <td><button (click)="deleteProject(p.projectid)">x</button></td>
+  </tr>
+</table>
+
+<form (submit)="addNewProject(
+  {projectid:pid.value,name:pname.value,location:ploc.value})" *ngIf="isAddingProject">
+<tr>
+  <td><input placeholder="Number" size="8" #pid required value="0"></td> <!--to use any HTML Element in Angular #<id>-->
+  <td><input placeholder="Name" size="8" #pname required></td>
+  <td><input placeholder="Location" size="8" #ploc required></td>
+  <td><input type="submit" value="Add"></td> 
+  <td>
+      <div [hidden]="isvalidProject" class="alert alert-danger">
+          {{message}}
+        </div>
+  </td>
+</tr>
+</form>
