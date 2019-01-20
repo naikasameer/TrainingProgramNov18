@@ -6,6 +6,11 @@ package com.mastek.training_app;
  */
 public class App 
 {
+	public static void simpleMethod() {
+		System.out.println("A New Method");
+	}
+	
+	
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
