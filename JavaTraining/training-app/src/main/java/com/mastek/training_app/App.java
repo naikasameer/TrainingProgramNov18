@@ -12,4 +12,8 @@ public class App
         System.out.println("I did Change 1");
         System.out.println("I did Change 2");
     }
+    
+    public static void businessMethod1() {
+    	System.out.println("A new Business Method");
+    }
 }
