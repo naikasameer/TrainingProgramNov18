@@ -26,7 +26,7 @@ export class EmpComponent implements OnInit {
   constructor(private prjsvc:ProjectService) {  
         // import the Project Service in component
     this.displaymessage=""
-    this.empno=11988999
+    this.empno=11988
     this.name="Sameer A. Naik"
     this.department="L&D"
     this.joiningDate= new Date()
