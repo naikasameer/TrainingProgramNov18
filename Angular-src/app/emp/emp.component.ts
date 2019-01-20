@@ -11,6 +11,7 @@ export class EmpComponent implements OnInit {
 
   //declare the variables: <name>: <type>
   empno: number
+  firstname:string
   name: string
   department: string
   projects:Project[]
@@ -27,6 +28,7 @@ export class EmpComponent implements OnInit {
         // import the Project Service in component
     this.displaymessage=""
     this.empno=11988
+    this.firstname="Sam"
     this.name="Sameer A. Naik"
     this.department="L&D"
     this.joiningDate= new Date()
