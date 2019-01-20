@@ -1,0 +1,32 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+   
+    <diskStore path="java.io.tmpdir"/>
+   
+    <defaultCache
+            maxElementsInMemory="500"
+            eternal="false"
+            timeToIdleSeconds="10"
+            timeToLiveSeconds="10"
+            diskPersistent="false"
+            maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+    
+	<!--  
+		a. maxElementsInMemory: Maximum number of Objects for each Entity
+				stored in a cache
+		b. timeToIdleSeconds: Time interval between the current time 
+			and the last access time for each object
+		c. timeToLiveSeconds: Time interval between the current time 
+			and the creation time for each object
+		d. eternal: if true, Object never expires on timeout settings
+		e. overflowTODisk: write in disk cache file if cache count increases
+					attribute 'a' 
+		f. diskPersistent: if true, it uses cache file for maintaining cache
+		g. diskExpiryThreadIntervalSeconds: seconds after which the cache file
+			gets expired if none of the thread accesses for given time Interval 
+	-->
+   
+		
+</ehcache>

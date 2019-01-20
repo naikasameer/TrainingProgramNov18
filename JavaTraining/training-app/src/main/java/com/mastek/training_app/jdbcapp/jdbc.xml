@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- EmployeeJDBCDAO -->
+	<bean id="empJDBCDAO" class="com.mastek.training_app.jdbcapp.EmployeeJDBCDAO">
+		<property name="template" ref="jdbcTemplate"/>
+	</bean>
+	
+	<!-- JdbcTemplate -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<!-- Bean Wiring: referring to datasource using Bean id in xml configuration-->
+		<property name="dataSource" ref="mysqlDS"/>	
+	</bean>
+	
+	<!-- DriverManagerDataSource -->
+	<bean id="mysqlDS" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3316/graduate_training"/>
+		<property name="username" value="root"/>
+		<property name="password" value="M8$tek12"/>
+	</bean>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+

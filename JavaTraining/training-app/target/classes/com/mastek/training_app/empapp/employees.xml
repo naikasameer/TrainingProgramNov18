@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="defaultEmployee"
+		class="com.mastek.training_app.empapp.Employee">
+		
+		<!-- call Employee(empno,name,salary) -->
+		<constructor-arg name="empno" value="1001"/>
+		<constructor-arg name="name" value="UNKNOWN"/>
+		<constructor-arg name="salary" value="100.0"/>
+		
+		<property name="salary" value="30000.0"/>
+		
+		<property name="skills">
+			<list value-type="java.lang.String">
+				<value>C</value>
+				<value>MSOFFICE</value>
+			</list>
+		</property>
+		
+		<property name="currentProjects">
+			<map>
+				<entry key="P1" value="Main Project"/>
+				<entry key="P2" value="Mobile Project"/>
+			</map>
+		</property>
+		
+		<property name="profileURL">
+			<bean class="java.net.URL">
+				<constructor-arg value="http://www.linkedin.com/myProfile"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- parent: uses all property config from the bean id specified -->
+	<bean id="developerEmployee" parent="defaultEmployee">
+		<property name="salary" value="500000"/>
+		
+		<property name="skills">
+			<list merge="true">
+				<value>Java</value>
+				<value>Angular</value>
+			</list>
+		</property>
+	</bean>
+	
+</beans>

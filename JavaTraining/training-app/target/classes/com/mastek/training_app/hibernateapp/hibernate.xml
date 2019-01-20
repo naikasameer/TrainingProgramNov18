@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="hibernateDAO" 
+		class="com.mastek.training_app.hibernateapp.HibernateAccountDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="hibernatePaymentDAO" 
+		class="com.mastek.training_app.hibernateapp.PaymentDAO">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<!-- LocalSessionFactoryBean -->
+	<bean id="sessionFactory" 
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- configure the bean id for database connection -->
+		<property name="dataSource" ref="mysqlDS"/>
+		
+		<!-- Mention the list of classes to be managed by Hibernate -->
+		<property name="annotatedClasses">
+			<list>
+				<value>com.mastek.training_app.hibernateapp.Account</value>
+				<value>com.mastek.training_app.hibernateapp.Transaction</value>
+				<value>com.mastek.training_app.hibernateapp.Customer</value>
+				<value>com.mastek.training_app.hibernateapp.Payment</value>
+				<value>com.mastek.training_app.hibernateapp.ChequePayment</value>
+				<value>com.mastek.training_app.hibernateapp.CardPayment</value>				
+			</list>
+		</property>
+		
+		<!-- List of Properties to be managed by SessionFactory -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- Dialect: Grammar of Database syntax and datatypes -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
+				
+			<!-- option to auto generate schema in database 
+				create: drops all existing tables and create new tables
+				update: check the tables available, if not present create, else alter
+				validate: only validates the schema, no changes done in DB
+				create-drop: creates new tables on startup, drops tables on completion
+			-->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				
+				<!-- option to display SQL queries executed by Hibernate -->
+				<prop key="hibernate.show_sql">true</prop>
+				
+				<!-- set the session operation scope for session.getCurrentSession() -->
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				
+				<!-- Enable Hibernate Second Level Cache -->
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				
+				<!--  Enable Query Caching for HQL and Criterion -->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+
+				<!-- Configure the cache Provider -->				
+				<prop key="hibernate.javax.cache.provider"
+						>org.ehcache.jsr107.EhcacheCachingProvider</prop>
+						
+				<!-- Configure the cache Provider: configuration file-->				
+				<prop key="hibernate.cache.provider_configuration_file_resource_path"
+						>com/mastek/training_app/hibernateapp/ehcache-config.xml</prop>
+				
+				<!-- Configure the cache Provider: Cache Region Factory Class -->				
+				<prop key="hibernate.cache.region.factory_class"
+					>org.hibernate.cache.jcache.JCacheRegionFactory</prop>
+
+			</props>
+		</property>
+		
+	</bean>
+	
+	<!-- DriverManagerDataSource -->
+	<bean id="mysqlDS" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3316/graduate_training"/>
+		<property name="username" value="root"/>
+		<property name="password" value="M8$tek12"/>
+	</bean>
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
